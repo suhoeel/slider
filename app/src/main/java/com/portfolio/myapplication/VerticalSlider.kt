@@ -97,7 +97,7 @@ class VerticalSlider @JvmOverloads constructor(
         mHeight = h
         stepInterval = ((mHeight / MAX_STEP).toFloat())
         yPos = h.toFloat()
-        Log.d("VIEW", "$mWidth, $mHeight, $stepInterval")
+//        Log.d("VIEW", "$mWidth, $mHeight, $stepInterval")
 
     }
 
@@ -162,7 +162,7 @@ class VerticalSlider @JvmOverloads constructor(
         return mask
     }
 
-    fun setYPosWithVol(step: Int): Int {
+    fun setStep(step: Int) {
         this.step = step
         var drawPos = mHeight - (step * stepInterval)
 
@@ -170,10 +170,11 @@ class VerticalSlider @JvmOverloads constructor(
             0 -> drawPos = height.toFloat()
             10 -> drawPos = 0f
         }
-
+//        Log.d("VIEW", "mHeight $mHeight")
+//        Log.d("VIEW", "drawPos $drawPos")
         subSubSliderView!!.setYPosWithAnim(drawPos)
-        return step
     }
+
 
     fun getYPos(): Float {
         return yPos
@@ -222,17 +223,6 @@ class VerticalSlider @JvmOverloads constructor(
         var anim: ValueAnimator? = null
 
         fun setYPosWithAnim(y: Float) {
-            var tmpYPos = y
-            step = (MAX_STEP - (yPos / stepInterval)).toInt()
-
-            if (yPos < (stepInterval / MAX_STEP)) {
-                step = MAX_STEP
-                tmpYPos = 0f
-            } else if (yPos > mHeight - (stepInterval / MAX_STEP)) {
-                step = MIN_STEP
-                tmpYPos = mHeight.toFloat()
-            }
-
             if(anim != null && anim!!.isRunning) anim!!.cancel()
 
             anim = ValueAnimator.ofFloat(yPos, y).apply {
@@ -244,12 +234,10 @@ class VerticalSlider @JvmOverloads constructor(
             }
             anim!!.start()
 
-            sliderCallbackListener?.getCurrentY(tmpYPos)
+            sliderCallbackListener?.getCurrentY(y)
 
-            if(step != lastStep) {
-                sliderCallbackListener?.getCurrentStep(step)
-                lastStep = step
-            }
+            sliderCallbackListener?.getCurrentStep(step)
+            lastStep = step
         }
 
     }

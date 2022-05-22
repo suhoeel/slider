@@ -3,6 +3,7 @@ package com.portfolio.myapplication
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.widget.TextView
 
 class MainActivity : AppCompatActivity() {
 
@@ -12,34 +13,37 @@ class MainActivity : AppCompatActivity() {
 
         val slider = findViewById<VerticalSlider>(R.id.slider)
         val slider2 = findViewById<VerticalSlider>(R.id.slider2)
+        val text = findViewById<TextView>(R.id.text_slider)
+        val text2 = findViewById<TextView>(R.id.text_slider2)
 
-        var lastStep = slider.getStep()
-        var lastStep2 = slider2.getStep()
+
+        slider.addOnLayoutChangeListener { view, i, i2, i3, i4, i5, i6, i7, i8 ->
+            slider.setStep(4)
+
+        }
+        slider2.addOnLayoutChangeListener { view, i, i2, i3, i4, i5, i6, i7, i8 ->
+            slider2.setStep(6)
+        }
+
         slider.setSliderCallbackListener(object : SliderCallbackListener {
             override fun getCurrentY(yPos: Float) {
-                Log.d("VIEW", "SliderY $yPos")
+//                Log.d("VIEW", "SliderY $yPos")
             }
 
             override fun getCurrentStep(step: Int) {
-                lastStep = step
-                if(step > lastStep2) {
-                    slider2.setYPosWithVol(step)
-                    lastStep2 = step
-                } else if (step < lastStep2) {
-                    slider2.setYPosWithVol(step)
-                    lastStep2 = step
-                }
+                slider2.setStep(step)
+                text.text = step.toString()
                 Log.d("VIEW", "SliderStep $step")
             }
         })
 
         slider2.setSliderCallbackListener(object : SliderCallbackListener {
             override fun getCurrentY(yPos: Float) {
-                Log.d("VIEW", "SliderY2 $yPos")
+//                Log.d("VIEW", "SliderY2 $yPos")
             }
 
             override fun getCurrentStep(step: Int) {
-                lastStep2 = step
+                text2.text = step.toString()
                 Log.d("VIEW", "SliderStep2 $step")
             }
         })
