@@ -6,14 +6,28 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <!--<com.portfolio.myapplication.VerticalSlider
+    <com.portfolio.myapplication.VerticalSlider
         android:layout_width="150dp"
         android:layout_height="500dp"
         android:id="@+id/slider"
-        android:background="@color/teal_200"
+        app:sliderBackgroundColor="@color/purple_700"
+        app:sliderBarColor="@color/purple_200"
+        app:sliderBorderRadius="100"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toLeftOf="@id/slider2"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <com.portfolio.myapplication.VerticalSlider
+        android:layout_width="150dp"
+        android:layout_height="500dp"
+        android:id="@+id/slider2"
+        app:sliderBackgroundColor="@color/teal_200"
+        app:sliderBarColor="@color/teal_700"
+        app:sliderBorderRadius="100"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toRightOf="@id/slider"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />-->
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

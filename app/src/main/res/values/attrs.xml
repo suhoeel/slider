@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <declare-styleable name="VerticalSlider">
-        <attr name="seekbarColor" format="color" />
+        <attr name="sliderBackgroundColor" format="reference|color" />
+        <attr name="sliderBarColor" format="reference|color" />
+        <attr name="sliderBorderRadius" format="float" />
     </declare-styleable>
 </resources>
